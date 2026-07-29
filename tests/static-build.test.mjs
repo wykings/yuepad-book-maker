@@ -37,7 +37,10 @@ test("builds a directly deployable static site", async () => {
     new URL("../dist/index.html", import.meta.url),
     "utf8",
   );
-  assert.match(html, /<title>阅渡制书 · TXT 转 EPUB \/ AZW3<\/title>/);
+  assert.match(
+    html,
+    /<title>Yuedu Ebook Maker · TXT to EPUB \/ AZW3<\/title>/,
+  );
   assert.match(html, /<div id="root"><\/div>/);
   assert.match(html, /href="\/favicon\.png"/);
   assert.match(html, /content="https:\/\/book\.yuepad\.com\/og\.png"/);
@@ -52,6 +55,12 @@ test("builds a directly deployable static site", async () => {
   assert.match(script, /导出 AZW3/);
   assert.match(script, /language-trigger/);
   assert.match(script, /menuitemradio/);
+  assert.match(script, /yuedu-locale/);
+  assert.match(script, /zh-hant/);
+  assert.match(
+    script,
+    /github\.com\/wykings\/yuepad-book-maker\/issues\/new/,
+  );
   assert.match(script, /gb18030/i);
   assert.match(script, /image\/jpeg/);
   assert.match(script, /application\/epub\+zip/);
@@ -70,16 +79,18 @@ test("ships Cloudflare Pages, brand, and offline assets", async () => {
     readdir(new URL("../dist/", import.meta.url)),
     ]);
 
-  assert.equal(JSON.parse(manifest).name, "阅渡制书");
+  assert.equal(JSON.parse(manifest).name, "Yuedu Ebook Maker");
   assert.match(serviceWorker, /CACHE_NAME/);
   assert.match(headers, /X-Content-Type-Options/);
   assert.match(sitemap, /hreflang="zh-TW"/);
-  assert.match(sitemap, /https:\/\/book\.yuepad\.com\/en\//);
+  assert.match(sitemap, /https:\/\/book\.yuepad\.com\/zh-cn\//);
+  assert.match(sitemap, /hreflang="en" href="https:\/\/book\.yuepad\.com\/"/);
   assert.match(
     robots,
     /Sitemap: https:\/\/book\.yuepad\.com\/sitemap\.xml/,
   );
   assert.ok(files.includes("index.html"));
+  assert.ok(files.includes("zh-cn"));
   assert.ok(files.includes("brand-icon.png"));
   assert.ok(files.includes("icon-192.png"));
   assert.ok(files.includes("icon-512.png"));
@@ -91,9 +102,9 @@ test("ships Cloudflare Pages, brand, and offline assets", async () => {
 
 test("builds indexable Simplified Chinese, Traditional Chinese, and English pages", async () => {
   const [simplified, traditional, english] = await Promise.all([
-    readFile(new URL("../dist/index.html", import.meta.url), "utf8"),
+    readFile(new URL("../dist/zh-cn/index.html", import.meta.url), "utf8"),
     readFile(new URL("../dist/zh-tw/index.html", import.meta.url), "utf8"),
-    readFile(new URL("../dist/en/index.html", import.meta.url), "utf8"),
+    readFile(new URL("../dist/index.html", import.meta.url), "utf8"),
   ]);
 
   assert.match(simplified, /<html lang="zh-CN">/);

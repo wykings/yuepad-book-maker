@@ -1,8 +1,8 @@
 {
-  "name": "阅渡制书",
-  "short_name": "阅渡制书",
-  "description": "在浏览器里把 TXT 分章、整理封面并导出为 EPUB 或 AZW3。",
-  "lang": "zh-CN",
+  "name": "Yuedu Ebook Maker",
+  "short_name": "Yuedu",
+  "description": "Turn TXT manuscripts into EPUB or AZW3 ebooks entirely in your browser.",
+  "lang": "en",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

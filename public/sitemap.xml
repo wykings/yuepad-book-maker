@@ -3,27 +3,27 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://book.yuepad.com/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://book.yuepad.com/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://book.yuepad.com/zh-cn/"/>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://book.yuepad.com/zh-tw/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://book.yuepad.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://book.yuepad.com/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://book.yuepad.com/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://book.yuepad.com/zh-tw/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://book.yuepad.com/"/>
+    <loc>https://book.yuepad.com/zh-cn/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://book.yuepad.com/zh-cn/"/>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://book.yuepad.com/zh-tw/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://book.yuepad.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://book.yuepad.com/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://book.yuepad.com/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://book.yuepad.com/en/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://book.yuepad.com/"/>
+    <loc>https://book.yuepad.com/zh-tw/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://book.yuepad.com/zh-cn/"/>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://book.yuepad.com/zh-tw/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://book.yuepad.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://book.yuepad.com/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://book.yuepad.com/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

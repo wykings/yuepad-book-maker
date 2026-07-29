@@ -1,9 +1,11 @@
 export type Locale = "zh-CN" | "zh-TW" | "en";
 
+export const DEFAULT_LOCALE: Locale = "en";
+
 export const LOCALE_PATHS: Record<Locale, string> = {
-  "zh-CN": "/",
+  "zh-CN": "/zh-cn/",
   "zh-TW": "/zh-tw/",
-  en: "/en/",
+  en: "/",
 };
 
 export const LANGUAGE_OPTIONS: Array<{ locale: Locale; label: string }> = [
@@ -17,6 +19,7 @@ const messages: Record<Locale, Record<string, string>> = {
     brandTagline: "TXT 转 EPUB / AZW3",
     privacy: "文件不会上传",
     language: "语言",
+    githubFeedback: "在 GitHub 提交建议",
     introTitle: "把 TXT 整理成电子书",
     introDescription:
       "选文件，检查分章，补上书名和封面，再按阅读方式导出。",
@@ -104,6 +107,7 @@ const messages: Record<Locale, Record<string, string>> = {
     brandTagline: "TXT 轉 EPUB / AZW3",
     privacy: "檔案不會上傳",
     language: "語言",
+    githubFeedback: "在 GitHub 提交建議",
     introTitle: "把 TXT 整理成電子書",
     introDescription:
       "選檔案、檢查分章、補上書名與封面，再依閱讀方式匯出。",
@@ -190,6 +194,7 @@ const messages: Record<Locale, Record<string, string>> = {
     brandTagline: "TXT to EPUB / AZW3",
     privacy: "Files never leave your device",
     language: "Language",
+    githubFeedback: "Share feedback on GitHub",
     introTitle: "Turn a TXT file into an ebook",
     introDescription:
       "Choose a file, review the chapters, add book details and export.",
@@ -298,10 +303,63 @@ const ruleNames: Record<Locale, Record<string, string>> = {
   },
 };
 
-export function localeFromPath(pathname = window.location.pathname): Locale {
-  if (/^\/en(?:\/|$)/i.test(pathname)) return "en";
+const LOCALE_STORAGE_KEY = "yuedu-locale";
+
+function storedLocale(): Locale | undefined {
+  try {
+    const locale = window.localStorage.getItem(LOCALE_STORAGE_KEY);
+    if (locale === "zh-CN" || locale === "zh-TW" || locale === "en") {
+      return locale;
+    }
+  } catch {
+    // Browser privacy settings may make localStorage unavailable.
+  }
+  return undefined;
+}
+
+export function rememberLocale(locale: Locale) {
+  try {
+    window.localStorage.setItem(LOCALE_STORAGE_KEY, locale);
+  } catch {
+    // The localized URL still preserves the user's choice.
+  }
+}
+
+export function localeFromLanguages(
+  languages: readonly string[] = navigator.languages?.length
+    ? navigator.languages
+    : [navigator.language],
+): Locale {
+  for (const language of languages) {
+    const normalized = language.toLowerCase().replace("_", "-");
+    if (
+      normalized === "zh-tw" ||
+      normalized === "zh-hk" ||
+      normalized === "zh-mo" ||
+      normalized.startsWith("zh-hant")
+    ) {
+      return "zh-TW";
+    }
+    if (normalized === "zh" || normalized.startsWith("zh-")) {
+      return "zh-CN";
+    }
+    if (normalized === "en" || normalized.startsWith("en-")) {
+      return "en";
+    }
+  }
+  return DEFAULT_LOCALE;
+}
+
+export function localeFromPath(
+  pathname = window.location.pathname,
+  languages: readonly string[] = navigator.languages?.length
+    ? navigator.languages
+    : [navigator.language],
+): Locale {
+  if (/^\/zh-cn(?:\/|$)/i.test(pathname)) return "zh-CN";
   if (/^\/zh-tw(?:\/|$)/i.test(pathname)) return "zh-TW";
-  return "zh-CN";
+  if (/^\/en(?:\/|$)/i.test(pathname)) return "en";
+  return storedLocale() ?? localeFromLanguages(languages);
 }
 
 export function message(
@@ -309,8 +367,7 @@ export function message(
   key: string,
   variables: Record<string, string | number> = {},
 ) {
-  const template =
-    messages[locale][key] ?? messages["zh-CN"][key] ?? key;
+  const template = messages[locale][key] ?? messages[DEFAULT_LOCALE][key] ?? key;
   return template.replace(/\{(\w+)\}/g, (_, name: string) =>
     String(variables[name] ?? `{${name}}`),
   );

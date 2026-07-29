@@ -18,6 +18,7 @@ export default defineConfig({
       input: {
         main: `${root}index.html`,
         en: `${root}en/index.html`,
+        "zh-cn": `${root}zh-cn/index.html`,
         "zh-tw": `${root}zh-tw/index.html`,
       },
     },

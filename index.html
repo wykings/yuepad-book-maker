@@ -1,73 +1,74 @@
-﻿<!doctype html>
-<html lang="zh-CN">
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="theme-color" content="#173e3a" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta
-      name="keywords"
-      content="TXT转EPUB,TXT转AZW3,Kindle电子书制作,EPUB制作,AZW3转换,阅渡制书"
-    />
-    <meta name="author" content="阅渡制书" />
-    <meta
       name="description"
-      content="在浏览器里把 TXT 分章、整理封面并导出为 EPUB 或 AZW3。文件不会上传。"
+      content="Split TXT books into chapters, crop a Kindle-ready cover, and export EPUB or AZW3 entirely in your browser."
     />
+    <meta
+      name="keywords"
+      content="TXT to EPUB,TXT to AZW3,Kindle ebook maker,EPUB creator,AZW3 converter"
+    />
+    <meta name="author" content="Yuedu Ebook Maker" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href="https://book.yuepad.com/" />
-    <link rel="alternate" hreflang="zh-CN" href="https://book.yuepad.com/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://book.yuepad.com/zh-cn/" />
     <link rel="alternate" hreflang="zh-TW" href="https://book.yuepad.com/zh-tw/" />
-    <link rel="alternate" hreflang="en" href="https://book.yuepad.com/en/" />
+    <link rel="alternate" hreflang="en" href="https://book.yuepad.com/" />
     <link rel="alternate" hreflang="x-default" href="https://book.yuepad.com/" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="阅渡制书" />
-    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="Yuedu Ebook Maker" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://book.yuepad.com/" />
-    <meta property="og:title" content="阅渡制书 · TXT 转 EPUB / AZW3" />
+    <meta property="og:title" content="Yuedu Ebook Maker · TXT to EPUB / AZW3" />
     <meta
       property="og:description"
-      content="选文件，检查分章，补上书名和封面，就可以导出。"
+      content="Prepare a Kindle-ready ebook locally in your browser. Your files are never uploaded."
     />
     <meta property="og:image" content="https://book.yuepad.com/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="阅渡制书 · TXT 转 EPUB / AZW3" />
+    <meta name="twitter:title" content="Yuedu Ebook Maker · TXT to EPUB / AZW3" />
     <meta
       name="twitter:description"
-      content="在浏览器本地完成 TXT 分章、封面裁剪和 EPUB、AZW3 导出。"
+      content="Split TXT books, crop a cover and export EPUB or AZW3 locally."
     />
     <meta name="twitter:image" content="https://book.yuepad.com/og.png" />
-    <title>阅渡制书 · TXT 转 EPUB / AZW3</title>
+    <title>Yuedu Ebook Maker · TXT to EPUB / AZW3</title>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "阅渡制书",
+        "name": "Yuedu Ebook Maker",
+        "alternateName": "阅渡制书",
         "url": "https://book.yuepad.com/",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Web",
-        "inLanguage": "zh-CN",
-        "description": "在浏览器本地把 TXT 分章并导出为 EPUB 或 AZW3，支持封面裁剪和 WebP 转换。",
+        "inLanguage": "en",
+        "description": "A private browser-based tool for turning TXT books into EPUB and KF8/AZW3 ebooks.",
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "CNY"
+          "priceCurrency": "USD"
         },
         "featureList": [
-          "TXT 自动分章",
-          "EPUB 导出",
-          "KF8/AZW3 导出",
-          "Kindle 封面裁剪",
-          "浏览器本地处理"
+          "TXT chapter detection",
+          "EPUB export",
+          "KF8/AZW3 export",
+          "Kindle cover cropping",
+          "Local browser processing"
         ]
       }
     </script>
   </head>
   <body>
     <div id="root"></div>
-    <noscript>阅渡制书需要启用 JavaScript，所有文件都只在当前浏览器中处理。</noscript>
+    <noscript>Yuedu Ebook Maker requires JavaScript. Your files are processed only in this browser.</noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,6 +1,7 @@
-const CACHE_NAME = "yuedu-books-v5";
+const CACHE_NAME = "yuedu-books-v6";
 const APP_SHELL = [
   "/",
+  "/zh-cn/",
   "/en/",
   "/zh-tw/",
   "/manifest.webmanifest",

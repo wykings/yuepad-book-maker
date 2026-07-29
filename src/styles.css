@@ -1143,6 +1143,30 @@ footer {
   font-size: 10px;
 }
 
+.footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.footer-meta a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer-meta a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-meta a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 .visually-hidden {
   position: absolute !important;
   width: 1px !important;
@@ -1390,6 +1414,12 @@ footer {
     flex-direction: column;
     gap: 4px;
     padding-bottom: 24px;
+  }
+
+  .footer-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
   }
 }
 

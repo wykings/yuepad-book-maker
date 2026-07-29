@@ -18,6 +18,7 @@ import {
   localeFromPath,
   localizeRule,
   message,
+  rememberLocale,
 } from "./i18n";
 
 type Chapter = {
@@ -942,6 +943,7 @@ export default function Home() {
 
   function changeLocale(nextLocale: Locale) {
     if (nextLocale === locale) return;
+    rememberLocale(nextLocale);
     window.location.assign(LOCALE_PATHS[nextLocale]);
   }
 
@@ -1760,7 +1762,17 @@ export default function Home() {
 
       <footer>
         <span>阅渡制书</span>
-        <span>{t("localOnly")}</span>
+        <div className="footer-meta">
+          <span>{t("localOnly")}</span>
+          <a
+            href="https://github.com/wykings/yuepad-book-maker/issues/new"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t("githubFeedback")}
+            <span aria-hidden="true"> ↗</span>
+          </a>
+        </div>
       </footer>
     </main>
   );

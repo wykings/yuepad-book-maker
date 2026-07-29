@@ -1,0 +1,30 @@
+{
+  "name": "yuedu-epub-web",
+  "version": "1.0.0",
+  "description": "A privacy-first browser tool for converting TXT manuscripts to EPUB and AZW3 e-books.",
+  "license": "GPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "npm run build && node --test tests/static-build.test.mjs",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
+  },
+  "devDependencies": {
+    "@types/node": "26.1.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "typescript": "5.9.3",
+    "vite": "8.1.5"
+  }
+}

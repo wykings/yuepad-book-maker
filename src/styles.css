@@ -807,6 +807,37 @@ button:disabled {
   text-align: center;
 }
 
+.send-to-kindle-link {
+  display: flex;
+  min-height: 42px;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid #c9dbd5;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 650;
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.send-to-kindle-link:hover {
+  border-color: var(--primary);
+  background: #f9fcfb;
+  transform: translateY(-1px);
+}
+
+.send-to-kindle-link:focus-visible {
+  outline: 3px solid rgba(38, 109, 101, 0.22);
+  outline-offset: 2px;
+}
+
 .format-notice {
   display: grid;
   gap: 3px;

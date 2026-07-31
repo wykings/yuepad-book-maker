@@ -23,6 +23,8 @@ test("builds a directly deployable static site", async () => {
   assert.match(script, /导出 EPUB/);
   assert.doesNotMatch(script, /导出 AZW3/);
   assert.match(script, /为什么暂不提供 AZW3/);
+  assert.match(script, /打开 Send to Kindle/);
+  assert.match(script, /https:\/\/www\.amazon\.com\/sendtokindle/);
   assert.match(script, /language-trigger/);
   assert.match(script, /menuitemradio/);
   assert.match(script, /yuedu-locale/);

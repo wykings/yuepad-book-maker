@@ -55,7 +55,8 @@ const messages: Record<Locale, Record<string, string>> = {
     reanalyze: "重新分析章节",
     generating: "正在生成",
     exportEpub: "导出 EPUB",
-    exportHint: "生成后可通过 Send to Kindle 发送到 Kindle",
+    exportHint: "EPUB 导出完成后，可直接前往 Amazon 传书",
+    sendToKindle: "打开 Send to Kindle",
     formatNoticeTitle: "为什么暂不提供 AZW3？",
     formatNoticeBody:
       "浏览器直接生成的 AZW3 在部分 Kindle，尤其较旧机型上，可能出现打开卡死或封面不显示。为避免导出不可用的文件，目前仅提供兼容性更稳定的 EPUB。",
@@ -140,7 +141,8 @@ const messages: Record<Locale, Record<string, string>> = {
     reanalyze: "重新分析章節",
     generating: "正在產生",
     exportEpub: "匯出 EPUB",
-    exportHint: "產生後可透過 Send to Kindle 傳送至 Kindle",
+    exportHint: "EPUB 匯出完成後，可直接前往 Amazon 傳書",
+    sendToKindle: "開啟 Send to Kindle",
     formatNoticeTitle: "為什麼暫不提供 AZW3？",
     formatNoticeBody:
       "瀏覽器直接產生的 AZW3 在部分 Kindle，尤其較舊機型上，可能無法開啟或不顯示封面。為避免匯出無法使用的檔案，目前僅提供相容性較穩定的 EPUB。",
@@ -225,7 +227,8 @@ const messages: Record<Locale, Record<string, string>> = {
     reanalyze: "Analyze chapters again",
     generating: "Generating",
     exportEpub: "Export EPUB",
-    exportHint: "Send the finished EPUB to Kindle with Send to Kindle",
+    exportHint: "Once exported, send the EPUB straight to your Kindle",
+    sendToKindle: "Open Send to Kindle",
     formatNoticeTitle: "Why is AZW3 unavailable?",
     formatNoticeBody:
       "AZW3 files generated directly in a browser may freeze or lose their cover on some Kindle devices, especially older models. To avoid unreliable downloads, this tool currently exports the more compatible EPUB format only.",

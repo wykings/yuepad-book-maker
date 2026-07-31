@@ -1427,6 +1427,15 @@ export default function Home() {
               </button>
             </div>
             <p>{t("exportHint")}</p>
+            <a
+              className="send-to-kindle-link"
+              href="https://www.amazon.com/sendtokindle"
+              target="_blank"
+              rel="noopener noreferrer external"
+            >
+              {t("sendToKindle")}
+              <span aria-hidden="true">↗</span>
+            </a>
             <div className="format-notice" role="note">
               <strong>{t("formatNoticeTitle")}</strong>
               <span>{t("formatNoticeBody")}</span>

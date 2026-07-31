@@ -1,7 +1,7 @@
 {
   "name": "Yuedu Ebook Maker",
   "short_name": "Yuedu",
-  "description": "Turn TXT manuscripts into EPUB or AZW3 ebooks entirely in your browser.",
+  "description": "Turn TXT manuscripts into EPUB ebooks entirely in your browser.",
   "lang": "en",
   "start_url": "/",
   "scope": "/",

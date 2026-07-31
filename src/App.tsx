@@ -10,7 +10,6 @@ import {
   useRef,
   useState,
 } from "react";
-import { createAzw3InWorker } from "./azw3/client";
 import {
   LANGUAGE_OPTIONS,
   LOCALE_PATHS,
@@ -392,7 +391,7 @@ function detectAndDecode(buffer: ArrayBuffer) {
   }
 }
 
-async function decodeCover(file: File) {
+async function decodeCover(file: Blob) {
   if ("createImageBitmap" in window) {
     const bitmap = await createImageBitmap(file, {
       imageOrientation: "from-image",
@@ -424,7 +423,7 @@ async function decodeCover(file: File) {
   }
 }
 
-function canvasToJpeg(canvas: HTMLCanvasElement) {
+function canvasToJpeg(canvas: HTMLCanvasElement, quality = 0.9) {
   return new Promise<Uint8Array<ArrayBuffer>>((resolve, reject) => {
     canvas.toBlob(
       async (blob) => {
@@ -435,7 +434,7 @@ function canvasToJpeg(canvas: HTMLCanvasElement) {
         resolve(new Uint8Array(await blob.arrayBuffer()));
       },
       "image/jpeg",
-      0.9,
+      quality,
     );
   });
 }
@@ -856,10 +855,6 @@ export default function Home() {
   const [dragActive, setDragActive] = useState(false);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [busy, setBusy] = useState(false);
-  const [activeExport, setActiveExport] = useState<"epub" | "azw3" | null>(
-    null,
-  );
-  const [exportProgress, setExportProgress] = useState(0);
   const [status, setStatus] = useState(() => t("chooseTxtFirst"));
   const [error, setError] = useState("");
 
@@ -1116,8 +1111,6 @@ export default function Home() {
       return;
     }
     setBusy(true);
-    setActiveExport("epub");
-    setExportProgress(10);
     setError("");
     setStatus(t("epubPreparing"));
     try {
@@ -1140,7 +1133,6 @@ export default function Home() {
       );
       const epub = createZip(entries);
       downloadBlob(epub, `${safeFileName(bookTitle)}.epub`);
-      setExportProgress(100);
       setStatus(
         t("epubDone", { size: formatBytes(epub.size) }),
       );
@@ -1148,61 +1140,6 @@ export default function Home() {
       setError(problem instanceof Error ? problem.message : t("epubFailed"));
     } finally {
       setBusy(false);
-      setActiveExport(null);
-    }
-  }
-
-  async function exportAzw3() {
-    if (!chapters.length) {
-      setError(t("noExportableChapters"));
-      return;
-    }
-    setBusy(true);
-    setActiveExport("azw3");
-    setExportProgress(3);
-    setError("");
-    setStatus(t("azw3Preparing"));
-    try {
-      await new Promise<void>((resolve) =>
-        window.requestAnimationFrame(() => resolve()),
-      );
-      const bookTitle = title.trim() || t("untitled");
-      const bookAuthor = author.trim() || t("anonymous");
-      const cover = await makeCoverJpeg(
-        coverFile,
-        bookTitle,
-        bookAuthor,
-        coverCrop,
-      );
-      const bytes = await createAzw3InWorker(
-        {
-          title: bookTitle,
-          author: bookAuthor,
-          language: "zh-CN",
-          chapters: chapters.map((chapter) => ({
-            title: chapter.title,
-            content: chapter.content,
-          })),
-          cover,
-        },
-        ({ progress }) => {
-          setExportProgress(progress);
-          setStatus(`${t("generating")} AZW3 · ${progress}%`);
-        },
-      );
-      const azw3 = new Blob([bytes], {
-        type: "application/vnd.amazon.ebook",
-      });
-      downloadBlob(azw3, `${safeFileName(bookTitle)}.azw3`);
-      setExportProgress(100);
-      setStatus(
-        t("azw3Done", { size: formatBytes(azw3.size) }),
-      );
-    } catch (problem) {
-      setError(problem instanceof Error ? problem.message : t("azw3Failed"));
-    } finally {
-      setBusy(false);
-      setActiveExport(null);
     }
   }
 
@@ -1473,52 +1410,27 @@ export default function Home() {
               <button
                 type="button"
                 className="primary-button"
-                onClick={() => void exportAzw3()}
-                disabled={!chapters.length || busy}
-              >
-                {activeExport === "azw3" ? (
-                  <>
-                    <span className="spinner" aria-hidden="true" />
-                    {t("generating")} {exportProgress}%
-                  </>
-                ) : (
-                  <>
-                    <span aria-hidden="true">↓</span>
-                    {t("exportAzw3")}
-                  </>
-                )}
-              </button>
-              <button
-                type="button"
-                className="secondary-button"
                 onClick={() => void exportEpub()}
                 disabled={!chapters.length || busy}
               >
-                {activeExport === "epub" ? (
+                {busy ? (
                   <>
                     <span className="spinner" aria-hidden="true" />
                     {t("generating")}
                   </>
                 ) : (
-                  t("exportEpub")
+                  <>
+                    <span aria-hidden="true">↓</span>
+                    {t("exportEpub")}
+                  </>
                 )}
               </button>
             </div>
-            {busy && activeExport && (
-              <div
-                className="export-progress"
-                role="progressbar"
-                aria-label={t("exportProgress", {
-                  format: activeExport.toUpperCase(),
-                })}
-                aria-valuemin={0}
-                aria-valuemax={100}
-                aria-valuenow={exportProgress}
-              >
-                <span style={{ width: `${exportProgress}%` }} />
-              </div>
-            )}
             <p>{t("exportHint")}</p>
+            <div className="format-notice" role="note">
+              <strong>{t("formatNoticeTitle")}</strong>
+              <span>{t("formatNoticeBody")}</span>
+            </div>
           </div>
         </aside>
 

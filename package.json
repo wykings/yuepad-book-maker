@@ -1,7 +1,7 @@
 {
   "name": "yuedu-epub-web",
   "version": "1.0.0",
-  "description": "A privacy-first browser tool for converting TXT manuscripts to EPUB and AZW3 e-books.",
+  "description": "A privacy-first browser tool for converting TXT manuscripts to EPUB e-books.",
   "license": "GPL-3.0-only",
   "private": true,
   "type": "module",
